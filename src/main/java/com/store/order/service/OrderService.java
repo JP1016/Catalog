@@ -39,4 +39,9 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    public int getOrderByUserId(Long id) {
+        log.info("Getting Order by User ID "+id);
+        return orderRepository.countAllByUserId(id);
+    }
+
 }

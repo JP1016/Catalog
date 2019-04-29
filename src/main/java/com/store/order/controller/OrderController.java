@@ -45,4 +45,16 @@ public class OrderController {
 
 
     }
+
+    @GetMapping("/orders/user/{id}")
+    public ResponseEntity orderByUserId(@PathVariable Long id) {
+        int order = orderService.getOrderByUserId(id);
+
+        log.info(String.format("Fetching Number of orders by user"));
+        return ResponseEntity.ok(order);
+
+
+    }
+
+
 }
