@@ -41,6 +41,7 @@ public class CatalogManagementTests {
 
         Mockito.lenient().when(orderRepository.findAll()).thenReturn(catalogList);
         Mockito.lenient().when(orderRepository.findById(2L)).thenReturn(Optional.of(catalog2));
+        Mockito.lenient().when(orderService.getOrderByUserId(1L)).thenReturn(2);
 
     }
 
@@ -52,8 +53,10 @@ public class CatalogManagementTests {
         assertEquals("Samsung", orderService.getOrderById(2L).get().getOrderDescription());
         assertEquals("Mobile", orderService.getOrderById(2L).get().getOrderProduct());
 
+        assertEquals(2,orderService.getOrderByUserId(1L));
         assertEquals(2,orderRepository.findAll().size());
     }
+
 
 
 }
