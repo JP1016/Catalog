@@ -1,9 +1,10 @@
 server:
   port: 9001
+  userUrl: ${USER_URL:users:9002}
 spring:
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: ${DB_CONNECTION_STRING:jdbc:mysql://localhost:3306/orders}
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:orders}?useSSL=false&allowPublicKeyRetrieval=true
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:codaglobal}
   jpa:
@@ -11,8 +12,21 @@ spring:
     properties:
       hibernate:
         ddl-auto: validate
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   flyway:
     enabled: true
     validate-on-migrate: true
+    connect-retries: 2
   application:
     name: Order
+  rabbitmq:
+    host: ${RABBIT_URL:localhost}
+    port: 5672
+    username: guest
+    password: guest
+
+
+
+spring.cloud.stream.bindings.input.destination: Orders

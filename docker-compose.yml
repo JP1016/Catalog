@@ -1,0 +1,23 @@
+version: '3'
+services:
+  sqldb:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=codaglobal
+      - MYSQL_DATABASE=orders
+      - MYSQL_USER = root
+    networks:
+      - backend
+  orders:
+    image: jp1016:orders
+    ports:
+      - "7300:9001"
+    environment:
+      - DB_HOST=sqldb
+      - RABBIT_URL=host.docker.internal
+    depends_on:
+      - sqldb
+    networks:
+      - backend
+networks:
+  backend:

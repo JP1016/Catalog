@@ -23,4 +23,10 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity(error, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(UserCreationFailedException.class)
+    public final ResponseEntity<ErrorResponse> handleUserCreationException(UserCreationFailedException e) {
+        ErrorResponse error = new ErrorResponse(e.getMessage(), AppConstants.FAILED_USER_CREATION,AppConstants.SERVER_ERROR);
+        return new ResponseEntity(error, HttpStatus.NOT_FOUND);
+    }
+
 }

@@ -29,20 +29,28 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.flywaydb:flyway-core'
 
+    //Data
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'mysql:mysql-connector-java'
 
-
+    //Test
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
     testCompile "org.mockito:mockito-core:2.+"
     testCompile('org.mockito:mockito-junit-jupiter:2.18.3')
 
-
+    //Microservice Communication
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-ribbon'
+
+
+    //Spring Cloud Stream
+    implementation 'org.springframework.cloud:spring-cloud-stream'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-stream-rabbit', version: '2.1.2.RELEASE'
+
+
 }
 
 
