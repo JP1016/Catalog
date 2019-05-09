@@ -16,15 +16,15 @@ public class Catalog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private Long id;
-    @Column(name="user_id")
+    @Column(name = "user_id")
     private Long userId;
-    @Column(name="order_code")
+    @Column(name = "order_code")
     private String orderCode;
-    @Column(name="order_product")
+    @Column(name = "order_product")
     private String orderProduct;
-    @Column(name="order_description")
+    @Column(name = "order_description")
     private String orderDescription;
 
 

@@ -14,6 +14,6 @@ public interface OrderRepository extends JpaRepository<Catalog, Long> {
     int countAllByUserId(Long id);
 
     @Query("SELECT new com.store.order.model.response.OrderResponse(c.orderProduct,c.orderDescription,u.firstName,u.lastName,c.id,u.id) from Catalog c join com.store.order.jpa.entity.UserEntity u on c.userId=u.id where c.orderProduct like %:productName%")
-    Page<OrderResponse> findAllOrders(@Param("productName") String productName,Pageable pageable);
+    Page<OrderResponse> findAllOrders(@Param("productName") String productName, Pageable pageable);
 
 }

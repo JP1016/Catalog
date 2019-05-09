@@ -14,7 +14,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -60,20 +59,21 @@ public class OrderController {
     }
 
     @GetMapping("/orders/list")
-    public ResponseEntity test(
-            @RequestParam(value = AppConstants.PAGE,defaultValue = AppConstants.DEFAULT_PAGE_NUM) int pageNum,
-            @RequestParam(value = AppConstants.SIZE,defaultValue = AppConstants.DEFAULT_ITEMS_PER_PAGE) int itemsPerPage,
-            @RequestParam(value = AppConstants.SORT_ITEM,required = false,defaultValue = AppConstants.DEFAULT_SORT_ITEM) String sortItem,
-            @RequestParam(value=AppConstants.SORT_ORDER,required = false,defaultValue = AppConstants.ASCENDING_ORDER) String sortOrder,
-            @RequestParam(value = AppConstants.SEARCH_KEY,required = false,defaultValue = AppConstants.DEFAULT_SEARCH_KEY) String searchKey){
-        log.info("Page: "+pageNum+" Size: "+itemsPerPage+" sortItem: "+sortItem+" sortOrder: "+sortOrder+" searchKey: "+searchKey);
+    public ResponseEntity getOrders(
+            @RequestParam(value = AppConstants.PAGE, defaultValue = AppConstants.DEFAULT_PAGE_NUM) int pageNum,
+            @RequestParam(value = AppConstants.SIZE, defaultValue = AppConstants.DEFAULT_ITEMS_PER_PAGE) int itemsPerPage,
+            @RequestParam(value = AppConstants.SORT_ITEM, required = false, defaultValue = AppConstants.DEFAULT_SORT_ITEM) String sortItem,
+            @RequestParam(value = AppConstants.SORT_ORDER, required = false, defaultValue = AppConstants.ASCENDING_ORDER) String sortOrder,
+            @RequestParam(value = AppConstants.SEARCH_KEY, required = false, defaultValue = AppConstants.DEFAULT_SEARCH_KEY) String searchKey) {
+        log.info("Page: " + pageNum + " Size: " + itemsPerPage + " sortItem: " + sortItem + " sortOrder: " + sortOrder + " searchKey: " + searchKey);
         Page<OrderResponse> allOrders = orderService.findAllOrders(pageNum, itemsPerPage, sortItem, sortOrder, searchKey);
         return ResponseEntity.ok(allOrders);
     }
 
-    public void getUsers(){
-        List<User> users=userProxy.getUsers();
-        orderService.insertUsers(users);
+    public void getUser(String id) {
+        User user = userProxy.getUser(id);
+        log.info("Got User from UserService: " + user.toString());
+        orderService.insertUser(user);
     }
 
 }

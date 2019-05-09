@@ -15,16 +15,16 @@ import java.util.Date;
 @Table(name = "User")
 public class UserEntity {
 
+    @Column(name = "first_name")
+    public String firstName;
+    @Column(name = "last_name")
+    public String lastName;
+    @Column(name = "dob")
+    public Date dob;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private Long id;
-    @Column(name="first_name")
-    public String firstName;
-    @Column(name="last_name")
-    public String lastName;
-    @Column(name="dob")
-    public Date dob;
 
     public UserEntity(String firstName, String lastName, Date dob) {
         this.firstName = firstName;

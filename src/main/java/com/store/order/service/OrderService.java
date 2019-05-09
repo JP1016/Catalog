@@ -16,10 +16,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
-import static com.store.order.utils.Helper.objectHasProperty;
 
 @Service
 @Slf4j
@@ -48,24 +46,15 @@ public class OrderService {
         return orderRepository.findById(id);
     }
 
-//    public List<Catalog> getAllOrders() {
-//        log.info("Getting All Orders");
-//        return orderRepository.findAll();
-//    }
-
     public int getOrderByUserId(Long id) {
         log.info("Getting Order by UserEntity ID " + id);
         return orderRepository.countAllByUserId(id);
     }
 
-    public void insertUsers(List<User> users) {
-        userRepository.deleteAll();
+    public void insertUser(User user) {
         try {
-            for (User user : users) {
-                UserEntity userEntity = new UserEntity(user.getFirstName(), user.getLastName(), user.getDob());
-                log.info(String.format("Inserting user %s into DB ", user.getFirstName()));
-                userRepository.save(userEntity);
-            }
+            UserEntity userEntity = new UserEntity(user.getFirstName(), user.getLastName(), user.getDob());
+            userRepository.save(userEntity);
         } catch (Exception ex) {
             log.error("Failed to Create Users %s", ex.getMessage());
             throw new UserCreationFailedException(ex.getMessage());
